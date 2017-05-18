@@ -21,8 +21,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User findUserWithBlogPostByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDAO.findUserByUsername(username);
 	}
 
 }
