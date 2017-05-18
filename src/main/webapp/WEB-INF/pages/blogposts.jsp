@@ -33,6 +33,10 @@
 </div>
 
 <div>
+	<br></br>
+	<a href="${pageContext.request.contextPath}/newBlogPost.html">New Blog Post</a>
+	<br></br>
+
 	<h1>Blog Post</h1>
 
 	<c:if test="${empty blogposts}">

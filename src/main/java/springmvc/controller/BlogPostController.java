@@ -1,10 +1,9 @@
 package springmvc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import springmvc.entity.BlogPost;
 import springmvc.entity.User;
@@ -49,4 +48,23 @@ public class BlogPostController {
         return new ModelAndView("blogposts","blogposts",blogPosts);
     }
 
+    @RequestMapping(value = "/draftblogposts", method = RequestMethod.GET)
+    public ModelAndView draftBlogPost(){
+        User user = userService.findUserWithBlogPostByUsername("user");
+        List<BlogPost> draftBlogPosts = blogPostService.listAllBlogPostsByUserAndDraftStatus(user,true);
+        return new ModelAndView("draftblogposts","draftblogposts",draftBlogPosts);
+    }
+
+    @RequestMapping(value = "/searchByTitle", method = RequestMethod.POST)
+    public ModelAndView searchByTitle(@RequestParam(value="title") String title){
+        User user = userService.findUserWithBlogPostByUsername("user");
+        List<BlogPost> blogPosts = blogPostService.listAllBlogPostsByUserAndTitleLike(user,title);
+        return new ModelAndView("draftblogposts","draftblogposts",blogPosts);
+    }
+
+    @RequestMapping(value = "/getBlogPostById/{id}", method = RequestMethod.GET)
+    @ResponseStatus(code = HttpStatus.OK)
+    public @ResponseBody BlogPost getBlogPostById(@PathVariable(value="id") Long id){
+        return blogPostService.findBlogPostById(id);
+    }
 }

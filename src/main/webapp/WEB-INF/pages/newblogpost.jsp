@@ -37,6 +37,7 @@
 	
 	<c:if test="${not empty message}">
 		${message} <br></br>
+          	<a href="${pageContext.request.contextPath}/blogposts">Blog Posts</a>
 	</c:if>
 	
 	<form action="${pageContext.request.contextPath}/saveBlogPost" method="post">
