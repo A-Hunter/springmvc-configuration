@@ -28,12 +28,14 @@ public class BlogPostServiceImpl implements BlogPostService{
 		LOGGER.debug("BlogPostServiceImpl : savePost is called.");
 		blogPost.setPublishDate(new Date());
 		blogPostDAO.save(blogPost);
+
 	}
 
 	@Override
 	public void saveAsDraft(BlogPost blogPost) {
 		blogPost.setDraft(true);
 		blogPostDAO.save(blogPost);
+//		blogPostDAO.findAllBlogPostsByUserAndTitleContaining()
 	}
 
 	@Override
